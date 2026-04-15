@@ -24,7 +24,7 @@ public class SubjectUpdateAction extends Action {
 
         SubjectDao dao = new SubjectDao();
         Subject subject = dao.get(cd, teacher.getSchool());
-
+//        o
         request.setAttribute("subject", subject);
         request.getRequestDispatcher("subject_update.jsp")
                .forward(request, response);

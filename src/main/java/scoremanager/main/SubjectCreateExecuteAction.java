@@ -50,7 +50,7 @@ public class SubjectCreateExecuteAction extends Action {
             }
         }
 
-        // --- 5. エラーがあれば戻す ---
+        // --- 5. エラーがあれば戻す ---w
         if (!errors.isEmpty()) {
             request.setAttribute("errors", errors);
             request.setAttribute("cd", cd);

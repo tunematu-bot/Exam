@@ -24,7 +24,7 @@ public class SubjectListAction extends Action {
         if (teacher == null) {
             teacher = new Teacher();
             School school = new School();
-            school.setCd("oom"); // DBの学校コードと一致させる
+            school.setCd("oom"); // DBの学校コードと一致さwせる
             teacher.setSchool(school);
             session.setAttribute("user", teacher);
         }

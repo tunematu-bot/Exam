@@ -1,17 +1,18 @@
 package scoremanager.main;
 
 import bean.Teacher;
+import dao.SubjectDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import tool.Action;
 
-public class SubjectCreateAction extends Action {
+public class SubjectDeleteAction extends Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        // --- 1. ログインチェック ---
+        // ログインチェック
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user");
         if (teacher == null) {
@@ -19,14 +20,14 @@ public class SubjectCreateAction extends Action {
             return;
         }
 
-        // --- 2. school_cd を Teacher → School → cd から取得 ---
-        String schoolCd = teacher.getSchool().getCd();
+        // パラメータ取得
+        String cd = request.getParameter("cd");
 
-        // JSPに出さないなら、ここは不要（保険で残してもOK1111
-        request.setAttribute("school_cd", schoolCd);
+        // 削除処理
+        SubjectDao dao = new SubjectDao();
+        dao.delete(cd, teacher.getSchool());
 
-        // --- 3. JSPへフォワード ---ああああwあ
-        request.getRequestDispatcher("subject_create.jsp")
-               .forward(request, response);
+        // 一覧に戻る
+        response.sendRedirect("SubjectList.action");
     }
 }

@@ -13,7 +13,7 @@
 
             <form method="post" action="SubjectUpdateExecute.action">
 
-                <!-- 科目コード（変更不可） -->
+                <!-- 科目コード（変更w不可） -->
                 <div class="mb-3 row">
                     <label class="col-sm-3 col-form-label">科目コード</label>
                     <div class="col-sm-6">
