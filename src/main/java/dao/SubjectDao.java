@@ -130,5 +130,24 @@ public class SubjectDao extends Dao {
     	
     	 return line;
     }
+    public int update(Subject subject) throws Exception {
+
+        Connection con = getConnection();
+        PreparedStatement st = con.prepareStatement(
+            "update subject set name = ? where cd = ? and school_cd = ?"
+        );
+
+        st.setString(1, subject.getName());
+        st.setString(2, subject.getCd());
+        st.setString(3, subject.getSchool().getCd());
+
+        int line = st.executeUpdate();
+
+        st.close();
+        con.close();
+
+        return line;
+    }
+
  
 }
