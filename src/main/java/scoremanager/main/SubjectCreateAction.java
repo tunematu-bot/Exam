@@ -22,7 +22,7 @@ public class SubjectCreateAction extends Action {
         // --- 2. school_cd を Teacher → School → cd から取得 ---
         String schoolCd = teacher.getSchool().getCd();
 
-        // JSPに出さないなら、ここは不要（保険で残してもOK）
+        // JSPに出さないなら、ここは不要（保険で残してもOK1111
         request.setAttribute("school_cd", schoolCd);
 
         // --- 3. JSPへフォワード ---
