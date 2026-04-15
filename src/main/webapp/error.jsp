@@ -7,6 +7,6 @@
 <title>エラーの画面だよ</title>
 </head>
 <body>
-
+エラー
 </body>
 </html>

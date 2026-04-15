@@ -9,6 +9,6 @@ public class LoginAction extends Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // ログイン画面(login.jsp)を表示するだけ
-        request.getRequestDispatcher("/scoremanager/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/scoremanager/main/login.jsp").forward(request, response);
     }
 }
