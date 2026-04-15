@@ -39,7 +39,7 @@ public class LoginExecuteAction extends Action {
             request.setAttribute("errors", errors);
             request.setAttribute("id", id); // 入力したIDをフォームに残す
 
-            request.getRequestDispatcher("/scoremanager/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/scoremanager/main/login.jsp").forward(request, response);
         }
     }
 }
