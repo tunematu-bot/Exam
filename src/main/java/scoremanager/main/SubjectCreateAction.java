@@ -25,7 +25,7 @@ public class SubjectCreateAction extends Action {
         // JSPに出さないなら、ここは不要（保険で残してもOK1111
         request.setAttribute("school_cd", schoolCd);
 
-        // --- 3. JSPへフォワード ---
+        // --- 3. JSPへフォワード ---あああああ
         request.getRequestDispatcher("subject_create.jsp")
                .forward(request, response);
     }
