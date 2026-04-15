@@ -116,4 +116,19 @@ public class SubjectDao extends Dao {
 
         return list;
     }
+    public int insert(Subject subject) throws Exception{
+    	Connection con=getConnection();
+    	PreparedStatement st=con.prepareStatement(
+    			 "insert into subject(school_cd, cd, name) values(?, ?, ?)");
+    	 st.setString(1, subject.getSchool().getCd());
+    	 st.setString(2, subject.getCd());
+    	 st.setString(3, subject.getName());
+    	 int line=st.executeUpdate();
+    	
+    	 st.close();
+    	 con.close();
+    	
+    	 return line;
+    }
+ 
 }
