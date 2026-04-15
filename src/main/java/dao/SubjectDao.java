@@ -148,6 +148,24 @@ public class SubjectDao extends Dao {
 
         return line;
     }
+    public int delete(String cd, School school) throws Exception {
+
+        Connection con = getConnection();
+        PreparedStatement st = con.prepareStatement(
+            "delete from subject where cd = ? and school_cd = ?"
+        );
+
+        st.setString(1, cd);
+        st.setString(2, school.getCd());
+
+        int line = st.executeUpdate();
+
+        st.close();
+        con.close();
+
+        return line;
+    }
+    
 
  
 }
