@@ -23,7 +23,7 @@ ${param.scripts}
 			class="d-flex flex-wrap justify-content-center py-3 px-5 mb-4 border-bottom border-2 bg-primary bg-opacity-10 bg-gradient">
 			<c:import url="/common/header.jsp" />
 		</header>
-
+		
 		<div class="row justify-content-center">
 			<c:choose>
 				<%-- ログイン済みの場合 --%>
