@@ -12,7 +12,7 @@ public class Dao {
         // データベースへのコネクションを返却
     	if (ds==null) {
 			InitialContext ic=new InitialContext();
-			ds=(DataSource)ic.lookup("java:/comp/env/jdbc/school");
+			ds=(DataSource)ic.lookup("java:/comp/env/jdbc/point");
     	}
         return ds.getConnection();
     	
