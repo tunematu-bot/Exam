@@ -24,17 +24,15 @@ public class SubjectCreateExecuteAction extends Action {
             return;
         }
 
-        // --- 2. リクエストパラメータ取得 ---
+        // --- 2. パラメータ取得 ---
         String cd = request.getParameter("cd");
         String name = request.getParameter("name");
 
-        // --- 3. 入力チェック ---
         Map<String, String> errors = new HashMap<>();
 
+        // --- 3. バリデーション ---
         if (cd == null || cd.isEmpty()) {
             errors.put("cd", "科目コードを入力してください");
-        } else if (cd.length() != 3) {
-            errors.put("cd", "科目コードは3桁で入力してください");
         }
 
         if (name == null || name.isEmpty()) {
@@ -44,37 +42,36 @@ public class SubjectCreateExecuteAction extends Action {
         // --- 4. 重複チェック ---
         SubjectDao sDao = new SubjectDao();
         if (errors.isEmpty()) {
-            Subject existing = sDao.get(cd, teacher.getSchool());
+            Subject existing = sDao.get(cd);
             if (existing != null) {
                 errors.put("cd", "科目コードが重複しています");
             }
         }
 
-        // --- 5. エラーがあれば戻す ---w
+        // --- 5. エラー時は戻す ---
         if (!errors.isEmpty()) {
             request.setAttribute("errors", errors);
             request.setAttribute("cd", cd);
             request.setAttribute("name", name);
+
             new SubjectCreateAction().execute(request, response);
             return;
         }
-     // --- 6. 保存 ---
+
+        // --- 6. 登録処理 ---
         Subject subject = new Subject();
-        subject.setSchool(teacher.getSchool());
         subject.setCd(cd);
         subject.setName(name);
+        subject.setSchool(teacher.getSchool());
 
         int line = sDao.insert(subject);
-        boolean success = (line == 1);
 
-        if (success) {
-            request.getRequestDispatcher("subject_create_done.jsp")
-                   .forward(request, response);
+        if (line > 0) {
+            request.getRequestDispatcher("subject_create_done.jsp").forward(request, response);
         } else {
             errors.put("system", "登録に失敗しました");
             request.setAttribute("errors", errors);
             new SubjectCreateAction().execute(request, response);
         }
-
     }
 }

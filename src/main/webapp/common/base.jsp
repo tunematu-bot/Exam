@@ -23,7 +23,11 @@ ${param.scripts}
 			class="d-flex flex-wrap justify-content-center py-3 px-5 mb-4 border-bottom border-2 bg-primary bg-opacity-10 bg-gradient">
 			<c:import url="/common/header.jsp" />
 		</header>
+<<<<<<< HEAD
 		
+=======
+ 
+>>>>>>> branch 'master' of https://github.com/tunematu-bot/Exam.git
 		<div class="row justify-content-center">
 			<c:choose>
 				<%-- ログイン済みの場合 --%>
@@ -42,7 +46,9 @@ ${param.scripts}
 		<footer class="py-2 my-4 bg-dark bg-opacity-10 border-top border-3 align-bottom">
 			<c:import url="/common/footer.jsp" />
 		</footer>
-
+ 
 	</div>
 </body>
 </html>
+ 
+ 
