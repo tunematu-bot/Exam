@@ -21,7 +21,7 @@ public class TestDao extends Dao {
     /**
      * get
      */
-    public Test get(Student student, Subject subject, School school, int no) throws Exception {
+    public Test get(String studentNo, String subjectCd, School school, int no) throws Exception {
 
         String sql = baseSql + "and student_no=? and subject_cd=? and no=?";
 
@@ -29,8 +29,8 @@ public class TestDao extends Dao {
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, school.getCd());
-            ps.setString(2, student.getNo());
-            ps.setString(3, subject.getCd());
+            ps.setString(2, studentNo);
+            ps.setString(3, subjectCd);
             ps.setInt(4, no);
 
             ResultSet rs = ps.executeQuery();
@@ -55,14 +55,14 @@ public class TestDao extends Dao {
             Test test = new Test();
 
             // student
-            Student student = studentDao.get(rSet.getString("student_no"), school);
+            Student student = studentDao.get(rSet.getString("student_no"));
             test.setStudent(student);
 
             // classNum
             test.setClassNum(rSet.getString("class_num"));
 
             // subject
-            Subject subject = subjectDao.get(rSet.getString("subject_cd"), school);
+            Subject subject = subjectDao.get(rSet.getString("subject_cd"));
             test.setSubject(subject);
 
             // school
