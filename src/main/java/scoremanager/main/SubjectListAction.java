@@ -16,11 +16,9 @@ public class SubjectListAction extends Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        // --- 1. セッションからユーザー情報を取得 ---
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user");
 
-        // --- 2. ログインチェック(スタブ処理: ログイン機能ができたら削除) ---
         if (teacher == null) {
             teacher = new Teacher();
             School school = new School();
@@ -29,7 +27,6 @@ public class SubjectListAction extends Action {
             session.setAttribute("user", teacher);
         }
 
-        // --- 3. 科目一覧を取得 ---
         SubjectDao subjectDao = new SubjectDao();
         List<bean.Subject> subjects = new ArrayList<>();
         try {
