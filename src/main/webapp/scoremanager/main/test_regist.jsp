@@ -130,22 +130,48 @@
 								            ${errorMap[stu.studentNo]}
 								        </div>
 								    </c:if>
-								
-								    <input type="hidden"
-								           name="studentNo"
-								           value="${stu.studentNo}">
-								</td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+							<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-                    <button type="submit" class="btn btn-secondary">
-                        登録して終了
-                    </button>
+<c:import url="/common/base.jsp">
+    <c:param name="title">成績登録完了</c:param>
 
-                </form>
-            </c:if>
+    <c:param name="content">
+        <section class="container mt-5">
+
+            <div class="card shadow-sm">
+                <div class="card-body text-center py-5">
+
+                    <h2 class="h4 mb-4 fw-bold text-success">
+                        成績の登録が完了しました
+                    </h2>
+
+                    <!-- 科目・回数・クラスなどを表示（Action でセットしておくと良い） -->
+                    <c:if test="${not empty subjectName}">
+                        <div class="mb-2">
+                            科目：${subjectName}
+                        </div>
+                    </c:if>
+
+                    <c:if test="${not empty times}">
+                        <div class="mb-2">
+                            回数：${times} 回
+                        </div>
+                    </c:if>
+
+                    <c:if test="${not empty className}">
+                        <div class="mb-4">
+                            クラス：${className}
+                        </div>
+                    </c:if>
+
+                    <a href="ScoreSearch.action" class="btn btn-secondary px-4">
+                        成績管理トップへ戻る
+                    </a>
+
+                </div>
+            </div>
 
         </section>
     </c:param>
