@@ -13,17 +13,17 @@ import dao.ClassNumDao;
 import dao.StudentDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import tool.Action;
  
 public class StudentListAction extends Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//	    HttpSession session = request.getSession();//セッション
-//	    Teacher teacher = (Teacher)session.getAttribute("user");
+	    HttpSession session = request.getSession();//セッション
+	    Teacher teacher = (Teacher)session.getAttribute("user");
 		School s = new School();
 		s.setCd("oom");
-		Teacher teacher = new Teacher();
 		teacher.setSchool(s);
 		
 		
