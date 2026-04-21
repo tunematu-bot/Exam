@@ -27,7 +27,7 @@
                             <a href="test_regist.jsp">成績登録</a>
                         </div>
                         <div class="">
-                            <a href="TestList.action">成績参照</a>
+                            <a href="test_list.jsp">成績参照</a>
                         </div>
                     </div>
                 </div>
