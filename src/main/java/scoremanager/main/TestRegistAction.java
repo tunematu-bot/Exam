@@ -1,6 +1,7 @@
 package scoremanager.main;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,14 @@ public class TestRegistAction extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
+        
+        List<Integer> yearList = new ArrayList<>();
+
+        int currentYear = LocalDate.now().getYear();
+        for (int i = 0; i < 10; i++) {
+            yearList.add(currentYear - i);
+        }
+        request.setAttribute("yearList", yearList);
 
         try {
             String[] studentNos = request.getParameterValues("studentNo");
