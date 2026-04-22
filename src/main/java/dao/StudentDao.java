@@ -331,5 +331,27 @@ public class StudentDao extends Dao {
         }
     }
  
- 
+    /**
+     * 入学年度一覧を取得（検索条件プルダウン用）
+     */
+    public List<Integer> getYearList() throws Exception {
+
+        List<Integer> list = new ArrayList<>();
+
+        String sql =
+            "select distinct ent_year " +
+            "from student " +
+            "order by ent_year desc";
+
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                list.add(rs.getInt("ent_year"));
+            }
+        }
+
+        return list;
+    }
 }

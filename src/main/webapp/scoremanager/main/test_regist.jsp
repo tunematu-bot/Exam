@@ -23,6 +23,7 @@
                                 <label class="form-label fw-bold">入学年度</label>
                                 <select name="year" class="form-select">
                                     <option value="">--------</option>
+                                    <option value="2023">2023</option>
                                     <c:forEach var="y" items="${yearList}">
                                         <option value="${y}"
                                             <c:if test="${y == param.year}">selected</c:if>>
@@ -36,6 +37,7 @@
                                 <label class="form-label fw-bold">クラス</label>
                                 <select name="classNum" class="form-select">
                                     <option value="">--------</option>
+                                    <option value="131">131</option>
                                     <c:forEach var="c" items="${classList}">
                                         <option value="${c.classNum}"
                                             <c:if test="${c.classNum == param.classNum}">selected</c:if>>
@@ -49,6 +51,7 @@
                                 <label class="form-label fw-bold">科目</label>
                                 <select name="subjectCd" class="form-select">
                                     <option value="">--------</option>
+                                    <option value="A02">A02</option>
                                     <c:forEach var="s" items="${subjectList}">
                                         <option value="${s.subjectCd}"
                                             <c:if test="${s.subjectCd == param.subjectCd}">selected</c:if>>
@@ -62,6 +65,7 @@
                                 <label class="form-label fw-bold">回数</label>
                                 <select name="times" class="form-select">
                                     <option value="">--------</option>
+                                    <option value="1">1</option>
                                     <c:forEach var="t" items="${timesList}">
                                         <option value="${t}"
                                             <c:if test="${t == param.times}">selected</c:if>>

@@ -118,4 +118,50 @@ public class SubjectDao extends Dao {
             return ps.executeUpdate();
         }
     }
+    
+    /**
+     * 科目コードから科目名を取得（成績登録画面用）
+     */
+    public String findName(String subjectCd) throws Exception {
+
+        String sql = "select name from subject where cd = ?";
+
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, subjectCd);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("name");
+            }
+        }
+
+        return "";
+    }
+    
+    /**
+     * 科目一覧取得（検索条件プルダウン用）
+     * 学校未指定で全件取得
+     */
+    public List<Subject> getSubjectList() throws Exception {
+
+        List<Subject> list = new ArrayList<>();
+
+        String sql = "select cd, name from subject order by cd asc";
+
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Subject subject = new Subject();
+                subject.setCd(rs.getString("cd"));
+                subject.setName(rs.getString("name"));
+                list.add(subject);
+            }
+        }
+
+        return list;
+    }
 }
