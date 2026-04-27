@@ -84,6 +84,10 @@ public class Student implements Serializable {
     public void setSchool(School school) {
     	this.school = school;
     }
+<<<<<<< HEAD
 }
  
  
+=======
+}
+>>>>>>> branch 'master' of https://github.com/tunematu-bot/Exam.git

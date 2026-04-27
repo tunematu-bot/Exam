@@ -25,9 +25,6 @@ public class StudentListAction extends Action {
 		s.setCd("oom");
 		Teacher teacher = new Teacher();
 		teacher.setSchool(s);
-		
-		
-		
 	    String entYearStr = "";//入力された入学年度
 	    String classNum = "";//入力されたクラス番号
 	    String isAttendStr = "";//入力された在学フラグ
