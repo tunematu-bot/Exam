@@ -1,28 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-
+ 
 <c:import url="/common/base.jsp">
     <c:param name="title">成績管理</c:param>
-
+ 
     <c:param name="content">
         <section class="container mt-4">
-
+ 
             <h2 class="h3 mb-4 fw-normal bg-secondary bg-opacity-10 py-2 px-4">
                 成績管理
             </h2>
-
+ 
             <!-- 検索条件 -->
             <div class="card mb-3">
                 <div class="card-body">
-
+ 
                     <form action="ScoreSearch.action" method="get">
                         <div class="row align-items-end g-3">
-
+ 
                             <div class="col-md-2">
                                 <label class="form-label fw-bold">入学年度</label>
                                 <select name="year" class="form-select">
                                     <option value="">--------</option>
+                                    <option value="2023">2023</option>
                                     <c:forEach var="y" items="${yearList}">
                                         <option value="${y}"
                                             <c:if test="${y == param.year}">selected</c:if>>
@@ -31,11 +32,12 @@
                                     </c:forEach>
                                 </select>
                             </div>
-
+ 
                             <div class="col-md-2">
                                 <label class="form-label fw-bold">クラス</label>
                                 <select name="classNum" class="form-select">
                                     <option value="">--------</option>
+                                    <option value="131">131</option>
                                     <c:forEach var="c" items="${classList}">
                                         <option value="${c.classNum}"
                                             <c:if test="${c.classNum == param.classNum}">selected</c:if>>
@@ -44,11 +46,12 @@
                                     </c:forEach>
                                 </select>
                             </div>
-
+ 
                             <div class="col-md-4">
                                 <label class="form-label fw-bold">科目</label>
                                 <select name="subjectCd" class="form-select">
                                     <option value="">--------</option>
+                                    <option value="A02">A02</option>
                                     <c:forEach var="s" items="${subjectList}">
                                         <option value="${s.subjectCd}"
                                             <c:if test="${s.subjectCd == param.subjectCd}">selected</c:if>>
@@ -57,11 +60,12 @@
                                     </c:forEach>
                                 </select>
                             </div>
-
+ 
                             <div class="col-md-2">
                                 <label class="form-label fw-bold">回数</label>
                                 <select name="times" class="form-select">
                                     <option value="">--------</option>
+                                    <option value="1">1</option>
                                     <c:forEach var="t" items="${timesList}">
                                         <option value="${t}"
                                             <c:if test="${t == param.times}">selected</c:if>>
@@ -70,32 +74,32 @@
                                     </c:forEach>
                                 </select>
                             </div>
-
+ 
                             <div class="col-md-2">
                                 <button type="submit" class="btn btn-secondary w-100">
-                                    検索
+                                    登録
                                 </button>
                             </div>
-
+ 
                         </div>
                     </form>
-
+ 
                 </div>
             </div>
-
+ 
             <!-- ▼ 検索後：点数入力画面 ▼ -->
             <c:if test="${not empty studentList}">
-
+ 
                 <div class="mb-2 fw-bold">
                     科目：${subjectName}（${times}回）
                 </div>
-
+ 
                 <form action="TestRegistAction" method="post">
-
+ 
                     <input type="hidden" name="subjectCd" value="${param.subjectCd}">
                     <input type="hidden" name="times" value="${param.times}">
                     <input type="hidden" name="classNum" value="${param.classNum}">
-
+ 
                     <table class="table table-bordered">
                         <thead class="table-light">
                         <tr>
@@ -106,7 +110,7 @@
                             <th>点数</th>
                         </tr>
                         </thead>
-
+ 
                         <tbody>
                         <c:forEach var="stu" items="${studentList}" varStatus="st">
                             <tr>
@@ -130,49 +134,24 @@
 								            ${errorMap[stu.studentNo]}
 								        </div>
 								    </c:if>
-							<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-
-<c:import url="/common/base.jsp">
-    <c:param name="title">成績登録完了</c:param>
-
-    <c:param name="content">
-        <section class="container mt-5">
-
-            <div class="card shadow-sm">
-                <div class="card-body text-center py-5">
-
-                    <h2 class="h4 mb-4 fw-bold text-success">
-                        成績の登録が完了しました
-                    </h2>
-
-                    <!-- 科目・回数・クラスなどを表示（Action でセットしておくと良い） -->
-                    <c:if test="${not empty subjectName}">
-                        <div class="mb-2">
-                            科目：${subjectName}
-                        </div>
-                    </c:if>
-
-                    <c:if test="${not empty times}">
-                        <div class="mb-2">
-                            回数：${times} 回
-                        </div>
-                    </c:if>
-
-                    <c:if test="${not empty className}">
-                        <div class="mb-4">
-                            クラス：${className}
-                        </div>
-                    </c:if>
-
-                    <a href="ScoreSearch.action" class="btn btn-secondary px-4">
-                        成績管理トップへ戻る
-                    </a>
-
-                </div>
-            </div>
-
+								
+								    <input type="hidden"
+								           name="studentNo"
+								           value="${stu.studentNo}">
+								</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+ 
+                    <button type="submit" class="btn btn-secondary">
+                        登録して終了
+                    </button>
+ 
+                </form>
+            </c:if>
+ 
         </section>
     </c:param>
 </c:import>
+ 

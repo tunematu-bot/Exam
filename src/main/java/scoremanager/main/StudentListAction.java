@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import tool.Action;
  
 public class StudentListAction extends Action {
-
+ 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 //	    HttpSession session = request.getSession();//セッション
@@ -104,5 +104,3 @@ public class StudentListAction extends Action {
 	    
 	}
 }
-
-

@@ -150,4 +150,28 @@ public class TestDao extends Dao {
             return ps.executeUpdate() > 0;
         }
     }
+    
+    public List<Test> get(String studentNo, School school) throws Exception {
+
+        String sql = baseSql + "and student_no=? order by no asc";
+
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, school.getCd());
+            ps.setString(2, studentNo);
+
+            ResultSet rs = ps.executeQuery();
+            return postFilter(rs, school);
+        }
+    }
+    
+    public List<Test> findBySchool(School school) throws Exception {
+        List<Test> list = new ArrayList<>();
+
+        // SQLを書く（school_cdで検索）
+
+        return list;
+    }
+
 }
