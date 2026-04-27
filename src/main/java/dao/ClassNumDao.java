@@ -114,29 +114,7 @@ public class ClassNumDao extends Dao {
 
 	    return list;
 	}
-	
-	/**
-	 * クラス一覧取得（検索条件プルダウン用）
-	 */
-	public List<ClassNum> getClassList() throws Exception {
 
-	    List<ClassNum> list = new ArrayList<>();
 
-	    String sql =
-	        "select class_num from class_num order by class_num";
 
-	    try (Connection con = getConnection();
-	         PreparedStatement ps = con.prepareStatement(sql);
-	         ResultSet rs = ps.executeQuery()) {
-
-	        while (rs.next()) {
-	            ClassNum c = new ClassNum();
-	            c.setClass_num(rs.getString("class_num"));
-	            list.add(c);
-	        }
-	    }
-
-	    return list;
-	}
-	
 }

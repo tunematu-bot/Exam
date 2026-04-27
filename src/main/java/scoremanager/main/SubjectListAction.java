@@ -1,9 +1,7 @@
 package scoremanager.main;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import bean.School;
 import bean.Teacher;
 import dao.SubjectDao;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,25 +17,20 @@ public class SubjectListAction extends Action {
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user");
 
+        // ★ 修正ポイント：teacher が null ならログイン画面へ
         if (teacher == null) {
-            teacher = new Teacher();
-            School school = new School();
-            school.setCd("oom"); // DBの学校コードと一致さwせる
-            teacher.setSchool(school);
-            session.setAttribute("user", teacher);
+            response.sendRedirect(request.getContextPath() + "/scoremanager/login.jsp");
+            return;
         }
 
+        // 科目一覧取得
         SubjectDao subjectDao = new SubjectDao();
-        List<bean.Subject> subjects = new ArrayList<>();
-        try {
-            subjects = subjectDao.filter(teacher.getSchool());
-        } catch (Exception e) {
-            System.out.println("★科目一覧の取得に失敗: " + e.getMessage());
-            e.printStackTrace();
-        }
+        List<bean.Subject> subjects = subjectDao.filter(teacher.getSchool());
 
-        System.out.println("★デバッグ: 科目取得件数 -> " + subjects.size());
+        // デバッグ
+        System.out.println("★科目取得件数 -> " + subjects.size());
 
+        // JSP へ渡す
         request.setAttribute("subjects", subjects);
 
         request.getRequestDispatcher("subject_list.jsp").forward(request, response);

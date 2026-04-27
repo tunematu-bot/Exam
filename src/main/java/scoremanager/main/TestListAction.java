@@ -44,7 +44,7 @@ public class TestListAction extends Action {
             // ===============================
             // 学生番号取得
             // ===============================
-            String studentNo = req.getParameter("StudentNo");
+            String studentNo = req.getParameter("studentNo");
 
             if (studentNo != null) {
                 studentNo = studentNo.trim();

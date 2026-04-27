@@ -16,7 +16,6 @@ public class SubjectUpdateAction extends Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        // --- 1. ログインチェック ---
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user");
         if (teacher == null) {
@@ -24,43 +23,55 @@ public class SubjectUpdateAction extends Action {
             return;
         }
 
-        // --- 2. パラメータ取得 ---
+        // GET → 編集画面表示
+        if (request.getMethod().equals("GET")) {
+
+            String cd = request.getParameter("cd");
+
+            SubjectDao dao = new SubjectDao();
+            Subject subject = dao.get(cd);
+
+            request.setAttribute("subject", subject);
+            request.getRequestDispatcher("subject_update.jsp").forward(request, response);
+            return;
+        }
+
+        // POST → 更新処理
         String cd = request.getParameter("cd");
         String name = request.getParameter("name");
 
         Map<String, String> errors = new HashMap<>();
 
-        // --- 3. バリデーション ---
         if (name == null || name.isEmpty()) {
             errors.put("name", "科目名を入力してください");
         }
 
-        // --- 4. エラー時は戻す ---
         if (!errors.isEmpty()) {
             request.setAttribute("errors", errors);
-            request.setAttribute("cd", cd);
-            request.setAttribute("name", name);
 
-            new SubjectEditAction().execute(request, response);
+            Subject subject = new Subject();
+            subject.setCd(cd);
+            subject.setName(name);
+            request.setAttribute("subject", subject);
+
+            request.getRequestDispatcher("subject_update.jsp").forward(request, response);
             return;
         }
 
-        // --- 5. 更新処理 ---
-        SubjectDao sDao = new SubjectDao();
+        SubjectDao dao = new SubjectDao();
         Subject subject = new Subject();
-
         subject.setCd(cd);
         subject.setName(name);
         subject.setSchool(teacher.getSchool());
 
-        int line = sDao.update(subject);
+        int line = dao.update(subject);
 
         if (line > 0) {
-            request.getRequestDispatcher("subject_update_done.jsp").forward(request, response);
+            response.sendRedirect("SubjectList.action");
         } else {
             errors.put("system", "更新に失敗しました");
             request.setAttribute("errors", errors);
-            new SubjectEditAction().execute(request, response);
+            request.getRequestDispatcher("subject_update.jsp").forward(request, response);
         }
     }
 }
